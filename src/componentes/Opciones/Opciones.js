@@ -14,18 +14,12 @@ const Opciones = () => {
   return (
     <div className="opciones">
       <label>Opciones</label>
-      <select className="select">
-        {equipos.map((equipo, index) =>
-          index === 0 ? (
-            <option disabled selected hidden key={index}>
-              {equipo}
-            </option>
-          ) : (
-            <option className="seleccionado" key={index}>
-              {equipo}
-            </option>
-          )
-        )}
+      <select className="select" defaultValue={equipos[0]}>
+        {equipos.map((equipo, index) => (
+          <option hidden={index === 0} key={index}>
+            {equipo}
+          </option>
+        ))}
       </select>
     </div>
   );

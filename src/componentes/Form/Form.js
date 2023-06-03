@@ -12,9 +12,9 @@ const Form = () => {
     <section className="form">
       <form onSubmit={envioFormulario}>
         <h2>Rellena el formulario para crear el colaborador.</h2>
-        <Input titulo="Nombre" placeholder="Ingresar Nombre" />
-        <Input titulo="Puesto" placeholder="Ingresar Puesto" />
-        <Input titulo="Foto" placeholder="Ingresar enlace de Foto" />
+        <Input titulo="Nombre" placeholder="Ingresar Nombre" required />
+        <Input titulo="Puesto" placeholder="Ingresar Puesto" required />
+        <Input titulo="Foto" placeholder="Ingresar enlace de Foto" required />
         <Opciones />
         <Boton texto="Crear" />
       </form>
