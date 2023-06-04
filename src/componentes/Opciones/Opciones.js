@@ -1,6 +1,10 @@
 import "./Opciones.css";
 
-const Opciones = () => {
+const Opciones = (props) => {
+  const recibirDatos = (e) => {
+    props.setValor(e.target.value);
+  };
+
   const equipos = [
     "Seleccionar Equipo",
     "Programacion",
@@ -14,9 +18,13 @@ const Opciones = () => {
   return (
     <div className="opciones">
       <label>Opciones</label>
-      <select className="select" defaultValue={equipos[0]}>
+      <select
+        defaultValue={equipos[0]}
+        valor={props.valor}
+        onChange={recibirDatos}
+      >
         {equipos.map((equipo, index) => (
-          <option hidden={index === 0} key={index}>
+          <option hidden={index === 0} key={index} value={equipo}>
             {equipo}
           </option>
         ))}
