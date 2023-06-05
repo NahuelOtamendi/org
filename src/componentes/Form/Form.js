@@ -4,7 +4,7 @@ import Opciones from "../Opciones/Opciones";
 import Boton from "../Boton/Boton";
 import { useState } from "react";
 
-const Form = () => {
+const Form = (props) => {
   const envioFormulario = (e) => {
     e.preventDefault();
     const datosRecividos = {
@@ -15,6 +15,7 @@ const Form = () => {
     };
     console.log(datosRecividos);
   };
+
   //Utilizo estados para enviar los valores ingresados mediante Props.
   const [nombre, setNombre] = useState("");
   const [puesto, setPuesto] = useState("");
@@ -30,7 +31,7 @@ const Form = () => {
           titulo="Nombre"
           placeholder="Ingresar Nombre"
           required
-          valor={nombre}
+          nombre={nombre}
           setValor={setNombre}
         />
         <Input
@@ -38,7 +39,7 @@ const Form = () => {
           titulo="Puesto"
           placeholder="Ingresar Puesto"
           required
-          valor={puesto}
+          puesto={puesto}
           setValor={setPuesto}
         />
         <Input
@@ -46,10 +47,10 @@ const Form = () => {
           titulo="Foto"
           placeholder="Ingresar enlace de Foto"
           required
-          valor={foto}
+          foto={foto}
           setValor={setFoto}
         />
-        <Opciones valor={equipo} setValor={setEquipo} />
+        <Opciones equipos={props.equipos} valor={equipo} setValor={setEquipo} />
         <Boton texto="Crear" />
       </form>
     </section>
