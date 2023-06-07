@@ -4,21 +4,20 @@ import Header from "./componentes/Header/Header";
 import Form from "./componentes/Form/Form";
 import MiOrg from "./componentes/MiOrg/MiOrg";
 import Equipo from "./componentes/Equipo/Equipo";
+import Footer from "./componentes/Footer/Footer";
 
 function App() {
   const [form, mostrarOcultarForm] = useState(false);
+  const [colaboradores, setColaboradores] = useState([]);
   //Ternario = condicion ? seMuestra : noMuestra
-
-  const [datosRecividos, setDatosRecibidos] = useState(null); // Estado para almacenar los datos recibidos
-
-  const recibirDatos = (datos) => {
-    setDatosRecibidos(datos); // Actualiza el estado con los datos recibidos
-  };
-
-  console.log(recibirDatos);
 
   const mostrarOcultar = () => {
     mostrarOcultarForm(!form);
+  };
+
+  const registroColaborador = (colaborador) => {
+    //spred operator: copia los valores para poder utilizarlos
+    setColaboradores([...colaboradores, colaborador]);
   };
 
   const equipos = [
@@ -66,11 +65,23 @@ function App() {
   return (
     <div>
       <Header />;
-      {!form && <Form equipos={equipos.map((equipo) => equipo.name)} />}
+      {!form && (
+        <Form
+          equipos={equipos.map((equipo) => equipo.name)}
+          registroColaborador={registroColaborador}
+        />
+      )}
       <MiOrg mostrarOcultar={mostrarOcultar} />;
       {equipos.slice(1).map((equipo) => (
-        <Equipo nombre={"nahuel"} valores={equipo} key={equipo.name} />
+        <Equipo
+          colaboradores={colaboradores.filter(
+            (colaborador) => colaborador.equipo === equipo.name
+          )}
+          valores={equipo}
+          key={equipo.name}
+        />
       ))}
+      <Footer />
     </div>
   );
 }

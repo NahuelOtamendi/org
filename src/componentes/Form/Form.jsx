@@ -13,7 +13,7 @@ const Form = (props) => {
       foto,
       equipo,
     };
-    console.log(datosRecividos);
+    props.registroColaborador(datosRecividos);
   };
 
   //Utilizo estados para enviar los valores ingresados mediante Props.
