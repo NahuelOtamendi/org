@@ -4,7 +4,7 @@ import "./Equipo.css";
 const Equipo = (props) => {
   //Destructuracion
   const { color1, color2, name } = props.valores;
-  const { colaboradores } = props;
+  const { colaboradores, eliminar} = props;
 
   return (
     colaboradores.length > 0 && (
@@ -18,6 +18,7 @@ const Equipo = (props) => {
                 datos={colaborador}
                 color1={props.valores.color1}
                 equipo={props.valores.name}
+                eliminar={eliminar}
               />
             );
           })}

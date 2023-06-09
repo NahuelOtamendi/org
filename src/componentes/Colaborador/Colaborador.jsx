@@ -1,10 +1,12 @@
 import "./Colaborador.css";
+import {AiOutlineCloseCircle} from "react-icons/ai"
 
 const Colaborador = (props) => {
   const { nombre, puesto, foto, equipo } = props.datos;
-  const { color1 } = props;
+  const { color1, eliminar } = props;
   return (
     <div className="colaborador">
+      <AiOutlineCloseCircle className="eliminar"onClick={eliminar}/>
       <div className="encabezado" style={{ backgroundColor: color1 }}>
         <img src={foto} alt="imagen"></img>
       </div>

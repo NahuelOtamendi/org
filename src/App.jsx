@@ -6,6 +6,7 @@ import MiOrg from "./componentes/MiOrg/MiOrg";
 import Equipo from "./componentes/Equipo/Equipo";
 import Footer from "./componentes/Footer/Footer";
 
+
 function App() {
   const [form, mostrarOcultarForm] = useState(false);
   const [colaboradores, setColaboradores] = useState([]);
@@ -19,6 +20,11 @@ function App() {
     //spred operator: copia los valores para poder utilizarlos
     setColaboradores([...colaboradores, colaborador]);
   };
+
+  //eliminar colaborador 
+const eliminarColaborador = () => {
+    console.log('eliminar colaborador')
+}
 
   const equipos = [
     {
@@ -79,6 +85,7 @@ function App() {
           )}
           valores={equipo}
           key={equipo.name}
+          eliminar={eliminarColaborador} 
         />
       ))}
       <Footer />
