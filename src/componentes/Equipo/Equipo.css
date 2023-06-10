@@ -4,6 +4,14 @@
     text-align: center;
     box-sizing: border-box;
     font-size: 32px;
+    position: relative;
+}
+
+
+.color{
+  position: absolute;
+  top: 20px;
+  right: 20px;   
 }
 
 .equipo h3 {
