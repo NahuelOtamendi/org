@@ -22,6 +22,14 @@ function App() {
   },
   {
     id: uuid(),
+    equipo: "Programación",
+    foto: "https://github.com/noeliaseballos.png",
+    nombre: "Noelia Seballos (Laucha)",
+    puesto: "Programmer",
+    fav: false
+  },
+  {
+    id: uuid(),
     equipo:"Data Science",
     foto: "https://github.com/NahuelOtamendi.png",
     nombre: "Nahuel Otamendi",
