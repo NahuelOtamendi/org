@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuid } from "uuid"
 import "./App.css";
 import Header from "./componentes/Header/Header";
 import Form from "./componentes/Form/Form";
@@ -12,31 +13,43 @@ function App() {
 
   const [colaboradores, setColaboradores] = useState([
   {
+    id: uuid(),
     equipo: "Front End",
     foto: "https://github.com/harlandlohora.png",
     nombre: "Harland Lohora",
     puesto: "Instructor"
+    
   },
   {
+    id: uuid(),
+    equipo:"Data Science",
+    foto: "https://github.com/NahuelOtamendi.png",
+    nombre: "Nahuel Otamendi",
+    puesto: "Programmer"
+  },
+  {
+    id: uuid(),
     equipo: "Programación",
     foto: "https://github.com/genesysaluralatam.png",
     nombre: "Genesys Rondón",
     puesto: "Desarrolladora de software e instructora"
   },
   {
-    
+    id: uuid(),
     equipo: "UX y Diseño",
     foto: "https://github.com/JeanmarieAluraLatam.png",
     nombre: "Jeanmarie Quijada",
     puesto: "Instructora en Alura Latam"
   },
   {
+    id: uuid(),
     equipo: "Programación",
     foto: "https://github.com/christianpva.png",
     nombre: "Christian Velasco",
     puesto: "Head de Alura e Instructor"
   },
   {
+    id: uuid(),
     equipo: "Innovación y Gestión",
     foto: "https://github.com/JoseDarioGonzalezCha.png",
     nombre: "Jose Gonzalez",
@@ -44,47 +57,49 @@ function App() {
   }
   ]);
  
+ 
   const [equipos, setEquipos] = useState([
     {
       name: "Seleccionar Equipo",
     },
   
     {
+      id: uuid(),
       name: "Programación",
-      color1: "#57C278 ",
-      color2: "#D9F7E9",
+      color1: "#57C278",
     },
     {
+      id: uuid(),
       name: "Front End",
       color1: "#82CFFA",
-      color2: "#E8F8FF",
     },
     {
+      id: uuid(),
       name: "Data Science",
       color1: "#A6D157",
-      color2: "#F0F8E2",
     },
     {
+      id: uuid(),
       name: "Dev Ops",
       color1: "#E06B69",
-      color2: "#FDE7E8",
     },
     {
+      id: uuid(),
       name: "UX y Diseño",
       color1: "#DB6EBF",
-      color2: "#FAE9F5",
     },
     {
+      id: uuid(),
       name: "Movil",
       color1: "#FFBA05",
-      color2: "#FFF5D9",
     },
     {
+      id: uuid(),
       name: "Innovación y Gestión",
       color1: "#FF8A29",
-      color2: "#FFEEDF",
     },
   ]);
+
 
    //Ternario = condicion ? seMuestra : noMuestra
    //Condicion && seMuestra
@@ -97,17 +112,20 @@ function App() {
     //spred operator: copia los valores para poder utilizarlos
     setColaboradores([...colaboradores, colaborador]);
   };
-
+ 
   //eliminar colaborador 
-  const eliminarColaborador = () => {
-    console.log('eliminar colaborador')
+  const eliminarColaborador = (id) => {
+    
+    const nuevosColaboradores = colaboradores.filter((colaborador) => colaborador.id !== id)
+    setColaboradores(nuevosColaboradores)
+    
   }
 
   //Cambiar color de equipos
-  const colorEquipo = (color, name) => {
-    console.log(color, name)
+  const colorEquipo = (color, id) => {
+    console.log(color, id)
     const colorActualizado = equipos.map((equipo) => {
-      if(equipo.name === name) {
+      if(equipo.id === id) {
         equipo.color1 = color
       }
       return equipo
@@ -117,6 +135,10 @@ function App() {
   
 }
 
+  //Crear nuevo equipo
+  const crearEquipo = (nuevoEquipo) => {
+    setEquipos([...equipos, {...nuevoEquipo, id: uuid()}])
+  }
 
   return (
     <div>
@@ -125,13 +147,14 @@ function App() {
         <Form
           equipos={equipos.map((equipo) => equipo.name)}
           registroColaborador={registroColaborador}
+          crearEquipo={crearEquipo}
         />
       )}
       <MiOrg mostrarOcultar={mostrarOcultar} />;
-      {equipos.slice(1).map((equipo) => (
+      {equipos.slice(1).map((equipo, index) => (
         <Equipo
           valores={equipo}
-          key={equipo.name}
+          key={index}
           colaboradores={colaboradores.filter(
             (colaborador) => colaborador.equipo === equipo.name
           )}

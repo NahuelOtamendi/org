@@ -4,22 +4,22 @@ import hexToRgba from "hex-to-rgba";
 
 const Equipo = (props) => {
   //Destructuracion
-  const { color1, color2, name } = props.valores;
+  const { color1, name, id } = props.valores;
   const { colaboradores, eliminar, colorEquipo} = props;
-  const colorFondo = { backgroundColor: hexToRgba( color1, 0.5) }
-  const colorBorde = { borderColor: hexToRgba( color1, 0.5) }
-  
+  const colorFondo = { backgroundColor: hexToRgba( color1, 0.6) }
+  const colorBorde = { borderColor: color1 }
+ 
   return (
     colaboradores.length > 0 && (
       
-      <section className="equipo" style={colorFondo}>
+      <section  className="equipo" style={colorFondo}>
         <input 
         type="color"
         className="color"
-        defaultValue={ colorBorde }
-        onChange={(e) => colorEquipo(e.target.value, name)}
+        value={color1}
+        onChange={(e) => colorEquipo(e.target.value, id)}
         />
-        <h3 style={colorBorde}>{name}</h3>
+        <h3  style={colorBorde}>{name}</h3>
         <div className="colaboradores">
           {colaboradores.map((colaborador, index) => 
               <Colaborador

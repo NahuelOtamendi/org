@@ -4,7 +4,19 @@ import Opciones from "../Opciones/Opciones";
 import Boton from "../Boton/Boton";
 import { useState } from "react";
 
+
+
 const Form = (props) => {
+   //Utilizo estados para enviar los valores ingresados mediante Props.
+   const [nombre, setNombre] = useState("");
+   const [puesto, setPuesto] = useState("");
+   const [foto, setFoto] = useState("");
+   const [equipo, setEquipo] = useState("");
+   const [name, setTitulo] = useState("");
+   const [color, setColor] = useState("");
+ 
+  const { registroColaborador, crearEquipo, id} = props
+
   const envioFormulario = (e) => {
     e.preventDefault();
     const datosRecividos = {
@@ -13,15 +25,15 @@ const Form = (props) => {
       foto,
       equipo,
     };
-    props.registroColaborador(datosRecividos);
+    registroColaborador(datosRecividos);
   };
 
-  //Utilizo estados para enviar los valores ingresados mediante Props.
-  const [nombre, setNombre] = useState("");
-  const [puesto, setPuesto] = useState("");
-  const [foto, setFoto] = useState("");
-  const [equipo, setEquipo] = useState("");
+  const envioEquipo = (e) => {
+    e.preventDefault()
+    crearEquipo({name, color1: color})
+  }
 
+ 
   return (
     <section className="form">
       <form onSubmit={envioFormulario}>
@@ -31,7 +43,7 @@ const Form = (props) => {
           titulo="Nombre"
           placeholder="Ingresar Nombre"
           required
-          nombre={nombre}
+          valor={nombre}
           setValor={setNombre}
         />
         <Input
@@ -39,7 +51,7 @@ const Form = (props) => {
           titulo="Puesto"
           placeholder="Ingresar Puesto"
           required
-          puesto={puesto}
+          valor={puesto}
           setValor={setPuesto}
         />
         <Input
@@ -47,13 +59,35 @@ const Form = (props) => {
           titulo="Foto"
           placeholder="Ingresar enlace de Foto"
           required
-          foto={foto}
+          valor={foto}
           setValor={setFoto}
         />
         <Opciones equipos={props.equipos} valor={equipo} setValor={setEquipo} />
         <Boton texto="Crear" />
       </form>
+      <form onSubmit={envioEquipo}>
+        <h2>Rellena el formulario para crear el Equipo.</h2>
+        <Input
+          type="text"
+          titulo="Titulo"
+          placeholder="Ingrese Titulo del Equipo"
+          required
+          valor={name}
+          setValor={setTitulo}
+        />
+        <Input
+          type="text"
+          titulo="Color"
+          placeholder="Ingresar Color del Equipo en Hex"
+          required
+          valor={color}
+          setValor={setColor}
+        />
+        <Boton texto="Crear" />
+        </form>
+        
     </section>
   );
 };
+
 export default Form;

@@ -14,7 +14,7 @@ const Opciones = (props) => {
         onChange={recibirDatos}
       >
         {props.equipos.map((equipo, index) => (
-          <option hidden={index === 0} key={equipo} value={equipo}>
+          <option hidden={index === 0} key={index} value={equipo}>
             {equipo}
           </option>
         ))}
