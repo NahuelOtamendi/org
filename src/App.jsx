@@ -17,43 +17,48 @@ function App() {
     equipo: "Front End",
     foto: "https://github.com/harlandlohora.png",
     nombre: "Harland Lohora",
-    puesto: "Instructor"
-    
+    puesto: "Instructor",
+    fav: false
   },
   {
     id: uuid(),
     equipo:"Data Science",
     foto: "https://github.com/NahuelOtamendi.png",
     nombre: "Nahuel Otamendi",
-    puesto: "Programmer"
+    puesto: "Programmer",
+    fav: false
   },
   {
     id: uuid(),
     equipo: "Programación",
     foto: "https://github.com/genesysaluralatam.png",
     nombre: "Genesys Rondón",
-    puesto: "Desarrolladora de software e instructora"
+    puesto: "Desarrolladora de software e instructora",
+    fav: false
   },
   {
     id: uuid(),
     equipo: "UX y Diseño",
     foto: "https://github.com/JeanmarieAluraLatam.png",
     nombre: "Jeanmarie Quijada",
-    puesto: "Instructora en Alura Latam"
+    puesto: "Instructora en Alura Latam",
+    fav: false
   },
   {
     id: uuid(),
     equipo: "Programación",
     foto: "https://github.com/christianpva.png",
     nombre: "Christian Velasco",
-    puesto: "Head de Alura e Instructor"
+    puesto: "Head de Alura e Instructor",
+    fav: false
   },
   {
     id: uuid(),
     equipo: "Innovación y Gestión",
     foto: "https://github.com/JoseDarioGonzalezCha.png",
     nombre: "Jose Gonzalez",
-    puesto: "Dev FullStack"
+    puesto: "Dev FullStack",
+    fav: false
   }
   ]);
  
@@ -110,13 +115,13 @@ function App() {
   //Registrar un nuevo colaborador
   const registroColaborador = (colaborador) => {
     //spred operator: copia los valores para poder utilizarlos
-    setColaboradores([...colaboradores, colaborador]);
+    setColaboradores([...colaboradores, {...colaborador, id: uuid()}]);
   };
  
   //eliminar colaborador 
   const eliminarColaborador = (id) => {
     
-    const nuevosColaboradores = colaboradores.filter((colaborador) => colaborador.id !== id)
+    const nuevosColaboradores = colaboradores.filter((colaborador) => colaborador.id  !== id)
     setColaboradores(nuevosColaboradores)
     
   }
@@ -140,6 +145,18 @@ function App() {
     setEquipos([...equipos, {...nuevoEquipo, id: uuid()}])
   }
 
+  const like = (id) => {
+    const likeColaboradores = colaboradores.map((colaborador) => {
+      if (colaborador.id === id) {
+        colaborador.fav = !colaborador.fav
+      }
+      return colaborador
+    })
+
+    setColaboradores(likeColaboradores)
+   
+  }
+
   return (
     <div>
       <Header />;
@@ -148,18 +165,20 @@ function App() {
           equipos={equipos.map((equipo) => equipo.name)}
           registroColaborador={registroColaborador}
           crearEquipo={crearEquipo}
+          
         />
       )}
       <MiOrg mostrarOcultar={mostrarOcultar} />;
       {equipos.slice(1).map((equipo, index) => (
         <Equipo
-          valores={equipo}
+          datos={equipo}
           key={index}
           colaboradores={colaboradores.filter(
             (colaborador) => colaborador.equipo === equipo.name
           )}
           eliminar={eliminarColaborador} 
           colorEquipo={colorEquipo}
+          like={like}
         />
       ))}
       <Footer />

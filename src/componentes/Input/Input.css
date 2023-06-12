@@ -27,3 +27,9 @@
 ::placeholder{
     color: #AFAFAF;
 }
+
+.input-color input{
+    height: 50px;
+    width: 50px;
+    padding: 0;
+}

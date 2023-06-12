@@ -15,7 +15,7 @@ const Form = (props) => {
    const [name, setTitulo] = useState("");
    const [color, setColor] = useState("");
  
-  const { registroColaborador, crearEquipo, id} = props
+  const { registroColaborador, crearEquipo} = props
 
   const envioFormulario = (e) => {
     e.preventDefault();
@@ -76,7 +76,7 @@ const Form = (props) => {
           setValor={setTitulo}
         />
         <Input
-          type="text"
+          type="color"
           titulo="Color"
           placeholder="Ingresar Color del Equipo en Hex"
           required
